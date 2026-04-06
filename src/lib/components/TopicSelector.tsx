@@ -20,6 +20,10 @@ const SUGGESTED_TOPICS = [
   "World War II",
   "Calculus Derivatives",
   "Newton's Laws",
+  "Python Data Structures",
+  "Photosynthesis Process",
+  "Life Processes",
+  "Finite Automata",
 ];
 
 const DIFFICULTY_OPTIONS: { value: Difficulty; label: string; description: string; color: string }[] = [
@@ -233,9 +237,6 @@ export default function TopicSelector() {
             </>
           )}
         </button>
-        <p className="text-center text-xs text-(--muted-textColor)">
-          Powered by Claude AI · Takes 5–15 seconds · Results are unique every time
-        </p>
       </div>
     </div>
   );

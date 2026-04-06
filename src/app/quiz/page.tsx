@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import TopicSelector from "@/lib/components/TopicSelector";
 import { useAuth } from "@clerk/nextjs";
+import AITutor from "@/lib/components/aiTutor";
 
 interface Question {
   id: number;
@@ -77,8 +78,6 @@ export default function QuizPage() {
     });
     setScore(correct);
     setIsSubmitted(true);
-
-    // Scroll to top to see results
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -247,14 +246,14 @@ export default function QuizPage() {
               <div
                 key={question.id}
                 className={`bg-(--card) border rounded-xl p-6 shadow-sm transition-all ${isSubmitted
-                    ? isCorrect
-                      ? 'border-green-500 border-2 shadow-green-100'
-                      : isWrong
-                        ? 'border-red-500 border-2 shadow-red-100'
-                        : 'border-(--border)'
-                    : isAnswered
-                      ? 'border-(--primary) shadow-md'
+                  ? isCorrect
+                    ? 'border-green-500 border-2 shadow-green-100'
+                    : isWrong
+                      ? 'border-red-500 border-2 shadow-red-100'
                       : 'border-(--border)'
+                  : isAnswered
+                    ? 'border-(--primary) shadow-md'
+                    : 'border-(--border)'
                   }`}
               >
                 <div className="flex items-start justify-between gap-4 mb-5">
@@ -264,10 +263,10 @@ export default function QuizPage() {
                   </p>
                   <div className="flex flex-col gap-2 items-end">
                     <span className={`px-3 py-1 rounded-full text-xs font-medium whitespace-nowrap ${question.difficulty === 'easy'
-                        ? 'bg-green-100 text-green-800'
-                        : question.difficulty === 'medium'
-                          ? 'bg-yellow-100 text-yellow-800'
-                          : 'bg-red-100 text-red-800'
+                      ? 'bg-green-100 text-green-800'
+                      : question.difficulty === 'medium'
+                        ? 'bg-yellow-100 text-yellow-800'
+                        : 'bg-red-100 text-red-800'
                       }`}>
                       {question.difficulty}
                     </span>
@@ -288,14 +287,14 @@ export default function QuizPage() {
                         onClick={() => handleOptionSelect(question.id, option)}
                         disabled={isSubmitted}
                         className={`text-left px-5 py-4 rounded-lg border-2 transition-all ${isSubmitted
-                            ? isCorrectOption
-                              ? 'bg-green-50 border-green-500 font-medium shadow-sm'
-                              : isSelected && !isCorrectOption
-                                ? 'bg-red-50 border-red-500 shadow-sm'
-                                : 'border-(--border) bg-white opacity-50'
-                            : isSelected
-                              ? 'border-(--primary) bg-blue-50 shadow-md transform scale-[1.02]'
-                              : 'border-(--border) bg-white hover:border-(--primary) hover:bg-(--muted) hover:shadow-sm'
+                          ? isCorrectOption
+                            ? 'bg-green-50 border-green-500 font-medium shadow-sm'
+                            : isSelected && !isCorrectOption
+                              ? 'bg-red-50 border-red-500 shadow-sm'
+                              : 'border-(--border) bg-white opacity-50'
+                          : isSelected
+                            ? 'border-(--primary) bg-blue-50 shadow-md transform scale-[1.02]'
+                            : 'border-(--border) bg-white hover:border-(--primary) hover:bg-(--muted) hover:shadow-sm'
                           } ${isSubmitted ? 'cursor-not-allowed' : 'cursor-pointer'}`}
                       >
                         <span className="flex items-center justify-between">
@@ -317,7 +316,7 @@ export default function QuizPage() {
                 {isSubmitted && (
                   <div className="mt-5 p-5 bg-(--muted) rounded-lg border border-(--border)">
                     <div className="flex items-start gap-3">
-                      <svg className="w-6 h-6 text-(--primary) flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <svg className="w-6 h-6 text-(--primary) shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
                       </svg>
                       <div className="flex-1">
@@ -336,7 +335,7 @@ export default function QuizPage() {
           })}
         </div>
         {!isSubmitted && (
-          <div className="sticky bottom-6 z-10">
+          <div className="sticky bottom-6 z-10 mb-10">
             <button
               onClick={handleSubmit}
               disabled={unansweredCount > 0}
@@ -361,6 +360,14 @@ export default function QuizPage() {
           </div>
         )}
       </div>
+      {isSubmitted && (
+        <section className="mt-8">
+          <h2 className="text-2xl font-bold mb-4 text-(--primary) flex items-center justify-center">
+            Need Help? Ask AI Tutor
+          </h2>
+          <AITutor context={`User just completed quiz on ${topic}. Score: ${score}/${questions.length}`} />
+        </section>
+      )}
     </div>
   );
 }
