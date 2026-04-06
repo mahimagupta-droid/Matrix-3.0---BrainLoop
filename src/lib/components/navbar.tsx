@@ -24,13 +24,13 @@ export default function Navbar() {
         </div>
         
         <div className="hidden md:flex items-center gap-8">
-          <Link className="relative text-md font-lato transition-all duration-300 hover:text-[var(--primary)]" href="/">
+          <Link className="relative text-md font-lato transition-all duration-300 hover:text-(--primary)" href="/">
             Home
           </Link>
-          <Link className="relative text-md font-lato transition-all duration-300 hover:text-[var(--primary)]" href="/quiz">
+          <Link className="relative text-md font-lato transition-all duration-300 hover:text-(--primary)" href="/quiz">
             Quiz
           </Link>
-          <Link className="relative text-md font-lato transition-all duration-300 hover:text-[var(--primary)]" href="/dashboard">
+          <Link className="relative text-md font-lato transition-all duration-300 hover:text-(--primary)" href="/dashboard">
             Dashboard
           </Link>
         </div>
@@ -39,7 +39,7 @@ export default function Navbar() {
           {isSignedIn ? (
             <>
               <SignOutButton>
-                <button className="text-sm font-medium hover:opacity-80 transition cursor-pointer bg-[var(--primary)] text-white px-4 py-2 rounded-md">
+                <button className="text-sm font-medium hover:opacity-80 transition cursor-pointer bg-(--primary) text-white px-4 py-2 rounded-md">
                   Log Out
                 </button>
               </SignOutButton>
@@ -47,7 +47,7 @@ export default function Navbar() {
             </>
           ) : (
             <SignInButton>
-              <button className="bg-[var(--primary)] text-white px-4 py-2 rounded-md font-medium hover:opacity-90 transition cursor-pointer">
+              <button className="bg-(--primary) text-white px-4 py-2 rounded-md font-medium hover:opacity-90 transition cursor-pointer">
                 Sign In
               </button>
             </SignInButton>
@@ -56,7 +56,7 @@ export default function Navbar() {
 
         {/* Mobile menu button */}
         <div className="md:hidden flex items-center">
-          <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="p-2 text-[var(--textColor)] focus:outline-hidden cursor-pointer">
+          <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="p-2 text-foreground focus:outline-hidden cursor-pointer">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               {isMenuOpen ? (
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -70,18 +70,18 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden flex flex-col items-center gap-4 py-4 px-4 border-t border-[var(--border)] bg-background">
-          <Link onClick={() => setIsMenuOpen(false)} className="w-full text-center py-2 text-md font-lato hover:text-[var(--primary)]" href="/">
+        <div className="md:hidden flex flex-col items-center gap-4 py-4 px-4 border-t border-(--border) bg-background">
+          <Link onClick={() => setIsMenuOpen(false)} className="w-full text-center py-2 text-md font-lato hover:text-(--primary)" href="/">
             Home
           </Link>
-          <Link onClick={() => setIsMenuOpen(false)} className="w-full text-center py-2 text-md font-lato hover:text-[var(--primary)]" href="/transactions">
+          <Link onClick={() => setIsMenuOpen(false)} className="w-full text-center py-2 text-md font-lato hover:text-(--primary)" href="/transactions">
             Quiz
           </Link>
-          <Link onClick={() => setIsMenuOpen(false)} className="w-full text-center py-2 text-md font-lato hover:text-[var(--primary)]" href="/dashboard">
+          <Link onClick={() => setIsMenuOpen(false)} className="w-full text-center py-2 text-md font-lato hover:text-(--primary)" href="/dashboard">
             Dashboard
           </Link>
           
-          <div className="w-full h-px bg-[var(--border)] my-2"></div>
+          <div className="w-full h-px bg-(--border) my-2"></div>
           
           <div className="flex w-full justify-center">
             {isSignedIn ? (
@@ -95,7 +95,7 @@ export default function Navbar() {
               </div>
             ) : (
               <SignInButton>
-                <button className="bg-[var(--primary)] text-white px-6 py-2 rounded-md font-medium w-full max-w-xs hover:opacity-90 transition cursor-pointer">
+                <button className="bg-(--primary) text-white px-6 py-2 rounded-md font-medium w-full max-w-xs hover:opacity-90 transition cursor-pointer">
                   Sign In
                 </button>
               </SignInButton>
