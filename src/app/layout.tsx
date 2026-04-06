@@ -41,7 +41,9 @@ export default function RootLayout({
             <Navbar />
           </div>
           {children}
-          <Footer />
+          <div className="border">
+            <Footer />
+          </div>
         </body>
       </ClerkProvider>
     </html>

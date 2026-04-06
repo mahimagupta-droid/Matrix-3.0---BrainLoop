@@ -1,11 +1,11 @@
 export default function Footer() {
   return (
-<footer className="bg-background border-t border-(--border) px-6 py-12">
+<footer className="bg-background border-t-4 border-[var(--border)] px-6 py-12">
   <div className="max-w-6xl mx-auto flex flex-col gap-10">
     <div className="grid md:grid-cols-4 gap-8">
       <div className="flex flex-col gap-3">
         <h3 className="text-lg font-semibold">BRAINLOOP</h3>
-        <p className="text-sm text-(--card-textColor) leading-relaxed">
+        <p className="text-sm text-[var(--card-textColor)] leading-relaxed">
           Adaptive learning powered by AI. Diagnose mistakes, understand concepts,
           and master any subject faster.
         </p>
@@ -13,10 +13,10 @@ export default function Footer() {
 
       <div>
         <h4 className="font-medium mb-3">Product</h4>
-        <ul className="space-y-2 text-sm text-(--card-textColor)">
-          <li className="hover:text-(--textColor) cursor-pointer">Features</li>
-          <li className="hover:text-(--textColor) cursor-pointer">How it Works</li>
-          <li className="hover:text-(--textColor) cursor-pointer">Pricing</li>
+        <ul className="space-y-2 text-sm text-[var(--card-textColor)]">
+          <li className="hover:text-[var(--textColor)] cursor-pointer">Features</li>
+          <li className="hover:text-[var(--textColor)] cursor-pointer">How it Works</li>
+          <li className="hover:text-[var(--textColor)] cursor-pointer">Pricing</li>
         </ul>
       </div>
 

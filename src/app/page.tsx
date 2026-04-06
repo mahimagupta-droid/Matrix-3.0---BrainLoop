@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function HomePage() {
   return (
-    <main className="flex flex-col justify-center items-center">
+    <main className="flex flex-col justify-center items-center gap-5">
       <section className="px-6">
         <div className="max-w-6xl mx-auto flex flex-col items-center text-center gap-4 py-20">
           <h1 className="text-4xl md:text-5xl font-bold leading-tight text-[var(--primary)]">
@@ -19,7 +19,7 @@ export default function HomePage() {
               </button>
             </Link>
             <Link href="/about">
-              <button className="bg-[var(--secondary)] text-[var(--secondary-textColor)] px-6 py-3 rounded-lg font-medium hover:opacity-80 transition cursor-pointer">
+              <button className="bg-[var(--secondary)] text-[var(--secondary-textColor)] px-6 py-3 rounded-lg font-medium hover:opacity-90 transition cursor-pointer">
                 Learn More
               </button>
             </Link>
@@ -65,7 +65,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      <section className="px-6 bg-[var(--muted)] py-16 w-full text-lg">
+      <section className="px-6 bg-[var(--muted)] py-16 w-[70%] text-lg">
         <h1 className="text-3xl font-semibold text-center">Our USP</h1>
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
           <div className="flex flex-col gap-2">
@@ -109,7 +109,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      <section className="px-6 py-20 bg-[var(--primary)] text-white rounded-lg">
+      <section className="px-6 py-20 bg-[var(--primary)] text-white rounded-lg mb-20">
         <div className="max-w-4xl mx-auto flex flex-col gap-6 text-center">
           <h2 className="text-3xl font-semibold">
             Ready to Master Your Topics?
