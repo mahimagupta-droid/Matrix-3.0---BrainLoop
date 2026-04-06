@@ -117,8 +117,8 @@ export default function HomePage() {
           <p className="opacity-90">
             Start practicing smarter today. Get instant AI feedback and watch your improvement accelerate.
           </p>
-          <button className="bg-white text-(--primary) px-6 py-3 rounded-lg font-medium hover:opacity-90 transition">
-            Get Started
+          <button className="bg-white text-(--primary) px-6 py-3 rounded-lg font-medium hover:opacity-90 transition cursor-pointer">
+            <Link href="/quiz">Get Started</Link>
           </button>
         </div>
       </section>

@@ -8,13 +8,13 @@ export default function QuizPage() {
     try {
       setSelectedOptions((prev) => ({ ...prev, [questionIndex]: option }));
     } catch (error) {
-      
+
     }
   };
 
   return (
     <div className="min-h-screen px-6 py-12 bg-(--muted) flex justify-center">
-      <div className="w-full max-w-3xl flex flex-col gap-8">
+      <div className="w-full max-w-3xl flex flex-col gap-9 mb-15 mt-10">
         {questions.map((question, index) => (
           <div
             key={index}
@@ -36,6 +36,9 @@ export default function QuizPage() {
 
           </div>
         ))}
+        <button className="bg-(--primary) text-white px-8 py-4 rounded-lg font-medium hover:opacity-90 transition cursor-pointer">
+          Submit
+        </button>
       </div>
     </div>
   );
