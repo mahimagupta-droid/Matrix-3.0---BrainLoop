@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { MagnifyingGlassIcon, ChatBubbleLeftRightIcon, ArrowPathIcon } from '@heroicons/react/24/outline';
 
 export default function HomePage() {
   return (
@@ -32,7 +33,7 @@ export default function HomePage() {
             The Problem
           </h2>
           <p className="text-(--card-textColor) leading-relaxed">
-            Traditional practice questions tell you if you're wrong, but not WHY.
+            Traditional practice questions tell you if you&apos;re wrong, but not WHY.
             You repeat the same mistakes, lose confidence, and struggle with topics.
             Without personalized feedback, improvement slows down.
           </p>
@@ -44,20 +45,29 @@ export default function HomePage() {
             Our Solution
           </h2>
           <div className="grid md:grid-cols-3 gap-6">
-            <div className="bg-(--card) p-6 rounded-lg border border-(--border) flex flex-col gap-3 hover:shadow-md transition">
-              <h3 className="text-lg font-semibold">🔍 Diagnose</h3>
+            <div className="bg-(--card) p-6 rounded-lg border border-(--border) flex flex-col gap-3 hover:shadow-md transition justify-center items-center">
+              <h3 className="text-xl font-semibold flex gap-2">
+                <MagnifyingGlassIcon width={24} height={24} />
+                Diagnose
+              </h3>
               <p className="text-(--card-textColor)">
                 AI analyzes your answers to identify exactly which concepts you&apos;re struggling with.
               </p>
             </div>
-            <div className="bg-(--card) p-6 rounded-lg border border-(--border) flex flex-col gap3 hover:shadow-md transition">
-              <h3 className="text-lg font-semibold">💡 Explain</h3>
+            <div className="bg-(--card) p-6 rounded-lg border border-(--border) flex flex-col gap3 hover:shadow-md transition justify-center items-center">
+              <h3 className="text-xl font-semibold flex gap-2">
+                <ChatBubbleLeftRightIcon width={24} height={24} />
+                Explain
+              </h3>
               <p className="text-(--card-textColor)">
                 Get personalized explanations tailored to your specific mistake.
               </p>
             </div>
-            <div className="bg-(--card) p-6 rounded-lg border border-(--border) flex flex-col gap-3 hover:shadow-md transition">
-              <h3 className="text-lg font-semibold">🎯 Reinforce</h3>
+            <div className="bg-(--card) p-6 rounded-lg border border-(--border) flex flex-col gap-3 hover:shadow-md transition justify-center items-center">
+              <h3 className="text-lg font-semibold">
+                <ArrowPathIcon width={24} height={24} />
+                Reinforce
+              </h3>
               <p className="text-(--card-textColor)">
                 Practice adaptive sequences from easy to hard until mastery.
               </p>
