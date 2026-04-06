@@ -2,7 +2,7 @@
 
 :root {
     /* Background Hierarchy */
-    --background: #ffffff;           /* White - main background */
+    --background: #e1e9f2;                      /* White - main background */
     --textColor: #1f2937;            /* Dark Gray - primary text */
 
     /* Card System */
@@ -54,26 +54,20 @@
 
 @theme inline {
   --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-foreground: var(--textColor);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+    --textColor: #ededed;
+  } */
+/* } */
 
 body {
   background: var(--background);
-  color: var(--foreground);
+  color: var(--textColor);
   font-family: Arial, Helvetica, sans-serif;
-}
-
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
 }
