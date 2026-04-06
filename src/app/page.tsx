@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { MagnifyingGlassIcon, ChatBubbleLeftRightIcon, ArrowPathIcon } from '@heroicons/react/24/outline';
+import TopicSelector from "@/lib/components/TopicSelector";
 
 export default function HomePage() {
   return (
@@ -118,6 +119,9 @@ export default function HomePage() {
             </div>
           </div>
         </div>
+      </section>
+      <section className="px-6 py-12 w-full max-w-4xl">
+        <TopicSelector />
       </section>
       <section className="px-6 py-20 bg-(--primary) text-white rounded-lg mb-20">
         <div className="max-w-4xl mx-auto flex flex-col gap-6 text-center">

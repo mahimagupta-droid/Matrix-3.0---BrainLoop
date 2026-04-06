@@ -11,7 +11,7 @@ export async function POST(request: NextRequest) {
     }
     const questionCount = Math.min(Math.max(numberOfQuestions || 10, 5), 20);
     const model = genAI.getGenerativeModel({
-      model: "gemini-1.5-flash", // fast + cheap + good
+      model: "gemini-2.5-flash", // fast + cheap + good
     });
 
     const prompt = `Generate exactly ${questionCount} multiple-choice questions about "${topic}" for an adaptive learning platform.
@@ -91,7 +91,7 @@ export async function POST(request: NextRequest) {
         difficulty: difficulty || "mixed",
         count: questions.length,
         generatedAt: new Date().toISOString(),
-        model: "gemini-1.5-flash",
+        model: "gemini-2.5-flash",
       },
     });
   } catch (error) {
