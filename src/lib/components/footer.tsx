@@ -14,27 +14,24 @@ export default function Footer() {
       <div>
         <h4 className="font-medium mb-3">Product</h4>
         <ul className="space-y-2 text-sm text-[var(--card-textColor)]">
-          <li className="hover:text-[var(--textColor)] cursor-pointer">Features</li>
-          <li className="hover:text-[var(--textColor)] cursor-pointer">How it Works</li>
-          <li className="hover:text-[var(--textColor)] cursor-pointer">Pricing</li>
+          <li><a href="#features" className="hover:text-[var(--textColor)] cursor-pointer">Features</a></li>
+          <li><a href="#how-it-works" className="hover:text-[var(--textColor)] cursor-pointer">How it Works</a></li>
         </ul>
       </div>
 
       <div>
         <h4 className="font-medium mb-3">Company</h4>
         <ul className="space-y-2 text-sm text-[var(--card-textColor)]">
-          <li className="hover:text-[var(--textColor)] cursor-pointer">About</li>
-          <li className="hover:text-[var(--textColor)] cursor-pointer">Careers</li>
-          <li className="hover:text-[var(--textColor)] cursor-pointer">Contact</li>
+          <li><a href="/about" className="hover:text-[var(--textColor)] cursor-pointer">About</a></li>
+          <li><a href="/contact" className="hover:text-[var(--textColor)] cursor-pointer">Contact</a></li>
         </ul>
       </div>
 
       <div>
         <h4 className="font-medium mb-3">Resources</h4>
         <ul className="space-y-2 text-sm text-[var(--card-textColor)]">
-          <li className="hover:text-[var(--textColor)] cursor-pointer">Docs</li>
-          <li className="hover:text-[var(--textColor)] cursor-pointer">Privacy Policy</li>
-          <li className="hover:text-[var(--textColor)] cursor-pointer">Terms of Service</li>
+          <li><a href="/privacy" className="hover:text-[var(--textColor)] cursor-pointer">Privacy Policy</a></li>
+          <li><a href="/terms" className="hover:text-[var(--textColor)] cursor-pointer">Terms of Service</a></li>
         </ul>
       </div>
 
@@ -45,9 +42,7 @@ export default function Footer() {
         © 2026 BRAINLOOP. All rights reserved.
       </p>
       <div className="flex gap-4 text-sm text-[var(--card-textColor)]">
-        <span className="hover:text-[var(--textColor)] cursor-pointer">Twitter</span>
-        <span className="hover:text-[var(--textColor)] cursor-pointer">LinkedIn</span>
-        <span className="hover:text-[var(--textColor)] cursor-pointer">GitHub</span>
+        <span><a href="https://github.com/mahimagupta-droid/Matrix-3.0---BrainLoop" className="hover:text-[var(--textColor)] cursor-pointer">GitHub</a></span>
       </div>
     </div>
   </div>

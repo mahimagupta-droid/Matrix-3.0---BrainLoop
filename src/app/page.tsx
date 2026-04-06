@@ -65,7 +65,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      <section className="px-6 bg-[var(--muted)] py-16 w-[70%] text-lg rounded-lg">
+      <section className="px-6 bg-[var(--muted)] py-16 w-[70%] text-lg rounded-lg" id="features">
         <h1 className="text-3xl font-semibold text-center mb-10">Our USP</h1>
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
           <div className="flex flex-col gap-2">
@@ -82,7 +82,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      <section className="px-6">
+      <section className="px-6" id="how-it-works">
         <div className="max-w-6xl mx-auto flex flex-col gap-12 py-20">
           <h2 className="text-3xl font-semibold text-center">
             How It Works
