@@ -1,6 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import TopicSelector from "@/lib/components/TopicSelector";
+import { useAuth } from "@clerk/nextjs";
 
 interface Question {
   id: number;
@@ -20,6 +22,7 @@ interface QuizMetadata {
 
 export default function QuizPage() {
   const router = useRouter();
+  const { userId, isLoaded } = useAuth();
   const [questions, setQuestions] = useState<Question[]>([]);
   const [selectedOptions, setSelectedOptions] = useState<Record<number, string>>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -29,8 +32,11 @@ export default function QuizPage() {
   const [metadata, setMetadata] = useState<QuizMetadata | null>(null);
 
   useEffect(() => {
-    const storedQuestions = sessionStorage.getItem('brainloop_questions');
-    const storedMetadata = sessionStorage.getItem('brainloop_meta');
+    if (!isLoaded) return;
+
+    const baseKey = userId ? `_${userId}` : "";
+    const storedQuestions = localStorage.getItem(`brainloop_questions${baseKey}`);
+    const storedMetadata = localStorage.getItem(`brainloop_meta${baseKey}`);
 
     if (storedQuestions) {
       try {
@@ -48,12 +54,13 @@ export default function QuizPage() {
         setLoading(false);
       } catch (error) {
         console.error('Error loading quiz:', error);
-        router.push('/');
+        setLoading(false);
       }
     } else {
-      router.push('/');
+      setQuestions([]);
+      setLoading(false);
     }
-  }, [router]);
+  }, [router, userId, isLoaded]);
 
   const handleOptionSelect = (questionId: number, option: string) => {
     if (!isSubmitted) {
@@ -83,8 +90,9 @@ export default function QuizPage() {
   };
 
   const handleNewTopic = () => {
-    sessionStorage.removeItem('brainloop_questions');
-    sessionStorage.removeItem('brainloop_meta');
+    const baseKey = userId ? `_${userId}` : "";
+    localStorage.removeItem(`brainloop_questions${baseKey}`);
+    localStorage.removeItem(`brainloop_meta${baseKey}`);
     router.push('/');
   };
 
@@ -118,21 +126,10 @@ export default function QuizPage() {
 
   if (questions.length === 0) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-(--muted) px-6">
-        <div className="text-center max-w-md">
-          <svg className="w-16 h-16 text-(--muted-textColor) mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-          <h2 className="text-2xl font-bold mb-2 text-(--textColor)">No Quiz Found</h2>
-          <p className="text-(--card-textColor) mb-6">
-            It looks like you haven&apos;t generated a quiz yet.
-          </p>
-          <button
-            onClick={handleNewTopic}
-            className="bg-(--primary) text-white px-6 py-3 rounded-lg hover:opacity-90 transition"
-          >
-            Generate a Quiz
-          </button>
+      <div className="min-h-screen py-16 bg-(--muted) px-6">
+        <div className="max-w-3xl mx-auto flex flex-col items-center gap-6">
+          <h2 className="text-3xl font-bold text-(--primary) mb-2">Load the quiz</h2>
+          <TopicSelector />
         </div>
       </div>
     );

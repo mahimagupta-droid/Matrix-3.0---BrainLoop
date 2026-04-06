@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@clerk/nextjs";
 import { AcademicCapIcon, SparklesIcon, AdjustmentsHorizontalIcon, HashtagIcon } from "@heroicons/react/24/outline";
 
 type Difficulty = "easy" | "medium" | "hard" | "mixed";
@@ -30,6 +31,7 @@ const DIFFICULTY_OPTIONS: { value: Difficulty; label: string; description: strin
 
 export default function TopicSelector() {
   const router = useRouter();
+  const { userId } = useAuth();
 
   const [topic,             setTopic            ] = useState("");
   const [difficulty,        setDifficulty       ] = useState<Difficulty>("mixed");
@@ -76,8 +78,9 @@ export default function TopicSelector() {
         throw new Error(data.error || "Failed to generate questions.");
       }
 
-      sessionStorage.setItem("brainloop_questions", JSON.stringify(data.questions));
-      sessionStorage.setItem("brainloop_meta", JSON.stringify(data.metadata));
+      const baseKey = userId ? `_${userId}` : "";
+      localStorage.setItem(`brainloop_questions${baseKey}`, JSON.stringify(data.questions));
+      localStorage.setItem(`brainloop_meta${baseKey}`, JSON.stringify(data.metadata));
 
       router.push("/quiz");
     } catch (err) {

@@ -1,20 +1,20 @@
 import { NextRequest, NextResponse } from "next/server";
-import { GoogleGenerativeAI } from "@google/generative-ai";
-
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
+import { GoogleGenAI } from "@google/genai";
+import { auth } from "@clerk/nextjs/server";
+const genAI = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY! });
 export async function POST(request: NextRequest) {
   try {
+    const authObj = auth();
+    if (!authObj.userId) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
     const body = await request.json();
     const { topic, difficulty, numberOfQuestions } = body;
     if (!topic || topic.trim().length === 0) {
       return NextResponse.json({ error: "Topic is required" }, { status: 400 });
     }
     const questionCount = Math.min(Math.max(numberOfQuestions || 10, 5), 20);
-    const model = genAI.getGenerativeModel({
-      model: "gemini-2.5-flash", // fast + cheap + good
-    });
-
-    const prompt = `Generate exactly ${questionCount} multiple-choice questions about "${topic}" for an adaptive learning platform.
+const prompt = `Generate exactly ${questionCount} multiple-choice questions about "${topic}" for an adaptive learning platform.
 
     Requirements:
     - Difficulty level: ${difficulty || "mixed (easy, medium, hard)"}
@@ -38,9 +38,12 @@ export async function POST(request: NextRequest) {
         }
     ]`;
 
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
-    const responseText = response.text();
+    const result = await genAI.models.generateContent({
+      model: "gemini-1.5-flash",
+      contents: [{ parts: [{ text: prompt }] }],
+    });
+    const response = result as any;
+    const responseText = response.candidates[0].content.parts[0].text;
     let questions;
     try {
       let cleaned = responseText.trim();

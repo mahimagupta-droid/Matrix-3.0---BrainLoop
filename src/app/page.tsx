@@ -120,9 +120,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      <section className="px-6 py-12 w-full max-w-4xl">
+      {/* <section className="px-6 py-12 w-full max-w-4xl">
         <TopicSelector />
-      </section>
+      </section> */}
       <section className="px-6 py-20 bg-(--primary) text-white rounded-lg mb-20">
         <div className="max-w-4xl mx-auto flex flex-col gap-6 text-center">
           <h2 className="text-3xl font-semibold">
