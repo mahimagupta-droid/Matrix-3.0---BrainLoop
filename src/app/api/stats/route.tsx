@@ -1,14 +1,12 @@
 // app/api/stats/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@clerk/nextjs/server';
-import { dbConnect } from '@/lib/db/mongoose';
+import { dbConnect } from '../../../lib/dbConnections/dbConnection';
 
 // You'll need to create a QuizResult model
 export async function GET(request: NextRequest) {
   const { userId } = await auth();
-  
-  // For now, use dummy data
-  // Replace with real DB queries later
+    await dbConnect();
   
   return NextResponse.json({
     totalQuizzes: 12,

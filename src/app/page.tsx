@@ -120,9 +120,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      {/* <section className="px-6 py-12 w-full max-w-4xl">
-        <TopicSelector />
-      </section> */}
       <section className="px-6 py-20 bg-(--primary) text-white rounded-lg mb-20">
         <div className="max-w-4xl mx-auto flex flex-col gap-6 text-center">
           <h2 className="text-3xl font-semibold">
@@ -134,6 +131,19 @@ export default function HomePage() {
           <button className="bg-white text-(--primary) px-6 py-3 rounded-lg font-medium hover:opacity-90 transition cursor-pointer">
             <Link href="/quiz">Get Started</Link>
           </button>
+        </div>
+      </section>
+      <section className="px-6 py-12 bg-(--card) mb-15">
+        <h2 className="text-3xl font-bold text-center mb-8">New Features!</h2>
+        <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          <div className="p-6 border border-(--border) rounded-xl">
+            <h3 className="text-xl font-semibold mb-2">🤖 AI Tutor</h3>
+            <p className="text-(--card-textColor)">Ask questions and get instant explanations</p>
+          </div>
+          <div className="p-6 border border-(--border) rounded-xl">
+            <h3 className="text-xl font-semibold mb-2">📊 Progress Tracking</h3>
+            <p className="text-(--card-textColor)">See your improvement over time</p>
+          </div>
         </div>
       </section>
     </main>
