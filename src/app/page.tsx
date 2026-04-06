@@ -64,7 +64,7 @@ export default function HomePage() {
               </p>
             </div>
             <div className="bg-(--card) p-6 rounded-lg border border-(--border) flex flex-col gap-3 hover:shadow-md transition justify-center items-center">
-              <h3 className="text-lg font-semibold">
+              <h3 className="text-lg font-semibold flex gap-2">
                 <ArrowPathIcon width={24} height={24} />
                 Reinforce
               </h3>
