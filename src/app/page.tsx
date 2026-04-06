@@ -26,7 +26,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      <section className="px-6 bg-[var(--muted)] py-16">
+      <section className="px-6 bg-[var(--muted)] py-16 rounded-lg">
         <div className="max-w-4xl mx-auto flex flex-col gap-4 text-center">
           <h2 className="text-3xl font-semibold">
             The Problem
@@ -47,7 +47,7 @@ export default function HomePage() {
             <div className="bg-[var(--card)] p-6 rounded-lg border border-[var(--border)] flex flex-col gap-3 hover:shadow-md transition">
               <h3 className="text-lg font-semibold">🔍 Diagnose</h3>
               <p className="text-[var(--card-textColor)]">
-                AI analyzes your answers to identify exactly which concepts you're struggling with.
+                AI analyzes your answers to identify exactly which concepts you&apos;re struggling with.
               </p>
             </div>
             <div className="bg-[var(--card)] p-6 rounded-lg border border-[var(--border)] flex flex-col gap3 hover:shadow-md transition">
@@ -65,8 +65,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      <section className="px-6 bg-[var(--muted)] py-16 w-[70%] text-lg">
-        <h1 className="text-3xl font-semibold text-center">Our USP</h1>
+      <section className="px-6 bg-[var(--muted)] py-16 w-[70%] text-lg rounded-lg">
+        <h1 className="text-3xl font-semibold text-center mb-10">Our USP</h1>
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
           <div className="flex flex-col gap-2">
             <h3 className="text-3xl font-bold text-[var(--primary)]">3x</h3>

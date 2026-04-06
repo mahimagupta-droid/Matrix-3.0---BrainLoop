@@ -27,7 +27,7 @@ export default function Navbar() {
           <Link className="relative text-md font-lato transition-all duration-300 hover:text-[var(--primary)]" href="/">
             Home
           </Link>
-          <Link className="relative text-md font-lato transition-all duration-300 hover:text-[var(--primary)]" href="/transactions">
+          <Link className="relative text-md font-lato transition-all duration-300 hover:text-[var(--primary)]" href="/quiz">
             Quiz
           </Link>
           <Link className="relative text-md font-lato transition-all duration-300 hover:text-[var(--primary)]" href="/dashboard">

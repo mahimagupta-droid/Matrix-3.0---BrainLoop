@@ -1,4 +1,5 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { NextResponse } from "next/server";
 
 // Define public routes that can be accessed without being signed in
 const isPublicRoute = createRouteMatcher([
@@ -11,6 +12,7 @@ export default clerkMiddleware(async (auth, request) => {
   if (!isPublicRoute(request)) {
     await auth.protect();
   }
+  return NextResponse.next();
 });
 
 export const config = {
