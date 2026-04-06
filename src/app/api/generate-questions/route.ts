@@ -5,7 +5,7 @@ const genAI = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY! });
 export async function POST(request: NextRequest) {
   try {
     const authObj = auth();
-    if (!authObj.userId) {
+    if (!(await authObj).userId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
     const body = await request.json();
@@ -42,6 +42,7 @@ const prompt = `Generate exactly ${questionCount} multiple-choice questions abou
       model: "gemini-1.5-flash",
       contents: [{ parts: [{ text: prompt }] }],
     });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const response = result as any;
     const responseText = response.candidates[0].content.parts[0].text;
     let questions;
