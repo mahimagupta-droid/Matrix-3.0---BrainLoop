@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { MagnifyingGlassIcon, ChatBubbleLeftRightIcon, ArrowPathIcon } from '@heroicons/react/24/outline';
-// import TopicSelector from "@/lib/components/TopicSelector";
 
 export default function HomePage() {
   return (
@@ -76,23 +75,26 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      <section className="px-6 bg-(--muted) py-16 w-[70%] text-lg rounded-lg" id="features">
-        <h1 className="text-3xl font-semibold text-center mb-10">Our USP</h1>
-        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-          <div className="flex flex-col gap-2">
-            <h3 className="text-3xl font-bold text-(--primary)">3x</h3>
-            <p className="text-(--card-textColor)">Faster improvement</p>
+      <section className="px-6 py-12 bg-(--card)">
+        <h2 className="text-3xl font-bold text-center mb-8">Features</h2>
+        <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+          <div className="p-6 border border-(--border) rounded-xl">
+            <h3 className="text-xl font-semibold mb-2">AI Tutor</h3>
+            <p className="text-(--card-textColor)">Ask questions and get instant explanations</p>
           </div>
-          <div className="flex flex-col gap-2">
-            <h3 className="text-3xl font-bold text-(--primary)">100%</h3>
-            <p className="text-(--card-textColor)">Personalized feedback</p>
+          <div className="p-6 border border-(--border) rounded-xl">
+            <h3 className="text-xl font-semibold mb-2">Progress Tracking</h3>
+            <p className="text-(--card-textColor)">See your improvement over time</p>
           </div>
-          <div className="flex flex-col gap-2">
-            <h3 className="text-3xl font-bold text-(--primary)">∞</h3>
-            <p className="text-(--card-textColor)">Questions available</p>
+          <div className="p-6 border border-(--border) rounded-xl">
+            <h3 className="text-xl font-semibold mb-2">Targeted Practice</h3>
+            <p className="text-(--card-textColor)">
+              AI analyzes your mistakes and generates personalized quizzes to improve your weak areas
+            </p>
           </div>
         </div>
       </section>
+
       <section className="px-6" id="how-it-works">
         <div className="max-w-6xl mx-auto flex flex-col gap-12 py-20">
           <h2 className="text-3xl font-semibold text-center">
@@ -133,16 +135,20 @@ export default function HomePage() {
           </button>
         </div>
       </section>
-      <section className="px-6 py-12 bg-(--card) mb-15">
-        <h2 className="text-3xl font-bold text-center mb-8">New Features!</h2>
-        <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-          <div className="p-6 border border-(--border) rounded-xl">
-            <h3 className="text-xl font-semibold mb-2">🤖 AI Tutor</h3>
-            <p className="text-(--card-textColor)">Ask questions and get instant explanations</p>
+      <section className="px-6 bg-(--muted) py-16 w-[70%] text-lg rounded-lg mb-15" id="features">
+        <h1 className="text-3xl font-semibold text-center mb-10">Our USP</h1>
+        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+          <div className="flex flex-col gap-2">
+            <h3 className="text-3xl font-bold text-(--primary)">3x</h3>
+            <p className="text-(--card-textColor)">Faster improvement</p>
           </div>
-          <div className="p-6 border border-(--border) rounded-xl">
-            <h3 className="text-xl font-semibold mb-2">📊 Progress Tracking</h3>
-            <p className="text-(--card-textColor)">See your improvement over time</p>
+          <div className="flex flex-col gap-2">
+            <h3 className="text-3xl font-bold text-(--primary)">100%</h3>
+            <p className="text-(--card-textColor)">Personalized feedback</p>
+          </div>
+          <div className="flex flex-col gap-2">
+            <h3 className="text-3xl font-bold text-(--primary)">∞</h3>
+            <p className="text-(--card-textColor)">Questions available</p>
           </div>
         </div>
       </section>

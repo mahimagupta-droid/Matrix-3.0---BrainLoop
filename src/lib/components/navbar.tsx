@@ -22,7 +22,7 @@ export default function Navbar() {
             />
           </Link>
         </div>
-        
+
         <div className="hidden md:flex items-center gap-8">
           <Link className="relative text-md font-lato transition-all duration-300 hover:text-(--primary)" href="/">
             Home
@@ -33,8 +33,11 @@ export default function Navbar() {
           <Link className="relative text-md font-lato transition-all duration-300 hover:text-(--primary)" href="/dashboard">
             Dashboard
           </Link>
+          <Link href="/weak-areas" className="hover:text-(--primary)">
+            Weak Areas
+          </Link>
         </div>
-        
+
         <div className="hidden md:flex items-center gap-8">
           {isSignedIn ? (
             <>
@@ -80,9 +83,9 @@ export default function Navbar() {
           <Link onClick={() => setIsMenuOpen(false)} className="w-full text-center py-2 text-md font-lato hover:text-(--primary)" href="/dashboard">
             Dashboard
           </Link>
-          
+
           <div className="w-full h-px bg-(--border) my-2"></div>
-          
+
           <div className="flex w-full justify-center">
             {isSignedIn ? (
               <div className="flex flex-col items-center gap-4">

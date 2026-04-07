@@ -16,7 +16,16 @@ export default function AITutor({ context = "" }: { context?: string }) {
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({ question, context })
       });
-      const data = await res.json();
+      const bodyText = await res.text();
+      let data;
+      try {
+        data = JSON.parse(bodyText);
+      } catch {
+        throw new Error(`Invalid JSON response from /api/tutor: ${bodyText.slice(0, 300)}`);
+      }
+      if (!res.ok) {
+        throw new Error(data.error || data.details || `Request failed: ${bodyText.slice(0, 300)}`);
+      }
       setMessages(prev => [...prev, {
         role: 'assistant',
         content: data.response

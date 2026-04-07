@@ -7,9 +7,27 @@ export default function QuickStats() {
   const [stats, setStats] = useState<any>(null);
 
   useEffect(() => {
-    fetch('/api/stats')
-      .then(r => r.json())
-      .then(setStats);
+    const fetchStats = async () => {
+      try {
+        const response = await fetch('/api/stats');
+        const text = await response.text();
+        let data;
+        try {
+          data = JSON.parse(text);
+        } catch {
+          throw new Error(`Invalid JSON response from /api/stats: ${text.slice(0, 300)}`);
+        }
+        if (!response.ok) {
+          throw new Error(data.error || data.details || `Request failed: ${text.slice(0, 300)}`);
+        }
+        setStats(data);
+      } catch (error) {
+        console.error('Error fetching stats:', error);
+        setStats({ error: error instanceof Error ? error.message : 'Failed to load stats.' });
+      }
+    };
+
+    fetchStats();
   }, []);
 
   if (!stats) return <div>Loading...</div>;

@@ -11,6 +11,12 @@ interface GeneratePayload {
   numberOfQuestions: number;
 }
 
+interface TopicSelectorProps {
+  // When provided, questions are passed directly to the caller instead of saving to localStorage and navigating.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onGenerated?: (questions: any[], topic: string, metadata: any) => void;
+}
+
 const SUGGESTED_TOPICS = [
   "JavaScript Promises",
   "Binary Search",
@@ -33,7 +39,7 @@ const DIFFICULTY_OPTIONS: { value: Difficulty; label: string; description: strin
   { value: "mixed",  label: "Mixed",  description: "All difficulty levels",  color: "var(--primary)" },
 ];
 
-export default function TopicSelector() {
+export default function TopicSelector({ onGenerated }: TopicSelectorProps = {}) {
   const router = useRouter();
   const { userId } = useAuth();
 
@@ -82,11 +88,14 @@ export default function TopicSelector() {
         throw new Error(data.error || "Failed to generate questions.");
       }
 
-      const baseKey = userId ? `_${userId}` : "";
-      localStorage.setItem(`brainloop_questions${baseKey}`, JSON.stringify(data.questions));
-      localStorage.setItem(`brainloop_meta${baseKey}`, JSON.stringify(data.metadata));
-
-      router.push("/quiz");
+      if (onGenerated) {
+        onGenerated(data.questions, trimmed, data.metadata);
+      } else {
+        const baseKey = userId ? `_${userId}` : "";
+        localStorage.setItem(`brainloop_questions${baseKey}`, JSON.stringify(data.questions));
+        localStorage.setItem(`brainloop_meta${baseKey}`, JSON.stringify(data.metadata));
+        router.push("/quiz");
+      }
     } catch (err) {
       setError(
         err instanceof Error

@@ -4,6 +4,8 @@ import { NextResponse } from "next/server";
 // Define public routes that can be accessed without being signed in
 const isPublicRoute = createRouteMatcher([
   "/",
+  "/quiz(.*)",
+  "/weak-areas(.*)",
   "/sign-in(.*)",
   "/sign-up(.*)",
   "/api/generate-questions(.*)"

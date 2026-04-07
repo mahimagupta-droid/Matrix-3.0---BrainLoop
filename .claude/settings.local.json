@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(xargs grep:*)",
+      "Bash(cat /c/Users/Mahima/Desktop/portfolio-projects/brainloop/next.config.*)",
+      "Bash(node -e \"const next = require\\('/c/Users/Mahima/Desktop/portfolio-projects/brainloop/node_modules/next/dist/shared/lib/constants'\\); console.log\\(next.NEXT_PROJECT_ROOT_DIST_SERVER || next.PAGE_TYPES || next.DEFAULT_PAGE_EXTENSIONS || 'not found'\\)\")",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(json.dumps\\(d.get\\('exports',{}\\), indent=2\\)\\)\")",
+      "Bash(node -e \"const p = require\\('/c/Users/Mahima/Desktop/portfolio-projects/brainloop/node_modules/@google/genai/package.json'\\); console.log\\(JSON.stringify\\(p.exports, null, 2\\)\\)\")",
+      "Bash(grep -v \"//\")"
+    ]
+  }
+}

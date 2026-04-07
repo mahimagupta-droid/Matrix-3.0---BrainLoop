@@ -1,25 +1,23 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextRequest, NextResponse } from "next/server";
-import { GoogleGenAI } from "@google/genai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import { auth } from "@clerk/nextjs/server";
 
-const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 const MODEL_ID = "gemini-2.5-flash";
 
 export async function POST(request: NextRequest) {
-  if (!GEMINI_API_KEY) {
-    console.error("Missing GEMINI_API_KEY");
-    return NextResponse.json(
-      { error: "Server configuration error: GEMINI_API_KEY is not set." },
-      { status: 500 },
-    );
-  }
-
-  const genAI = new GoogleGenAI({ apiKey: GEMINI_API_KEY });
-
   try {
-    const authObj = auth();
-    if (!(await authObj).userId) {
+    const { userId } = await auth();
+
+    if (!userId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    if (!process.env.GEMINI_API_KEY) {
+      return NextResponse.json(
+        { error: "Server configuration error: GEMINI_API_KEY is not set." },
+        { status: 500 },
+      );
     }
 
     const body = await request.json();
@@ -28,6 +26,9 @@ export async function POST(request: NextRequest) {
     if (!topic || topic.trim().length === 0) {
       return NextResponse.json({ error: "Topic is required" }, { status: 400 });
     }
+
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+    const model = genAI.getGenerativeModel({ model: MODEL_ID });
 
     const questionCount = Math.min(Math.max(numberOfQuestions || 10, 5), 20);
     const prompt = `Generate exactly ${questionCount} multiple-choice questions about "${topic}" for an adaptive learning platform.
@@ -54,22 +55,16 @@ Format:
   }
 ]`;
 
-    const result = await genAI.models.generateContent({
-      model: MODEL_ID,
-      contents: [{ text: prompt }],
+    const result = await model.generateContent({
+      contents: [{ role: "user", parts: [{ text: prompt }] }],
+      generationConfig: { temperature: 0.7, maxOutputTokens: 4096 },
     });
 
-    const responseText =
-      result.text?.trim() ||
-      (result.candidates?.[0]?.content?.parts?.[0]?.text ?? "").trim();
+    const responseText = result.response.text().trim();
 
     if (!responseText) {
-      console.error("Gemini returned an empty response", JSON.stringify(result, null, 2));
       return NextResponse.json(
-        {
-          error: "Empty response from Gemini API.",
-          details: "The Gemini response did not contain any text output.",
-        },
+        { error: "Empty response from Gemini API." },
         { status: 500 },
       );
     }
@@ -92,7 +87,7 @@ Format:
         throw new Error("Parsed response is not an array.");
       }
 
-      questions = questions.map((q, index) => ({
+      questions = questions.map((q: any, index: number) => ({
         id: q.id || index + 1,
         question: q.question || "",
         options: Array.isArray(q.options) ? q.options : [],
@@ -106,7 +101,6 @@ Format:
       return NextResponse.json(
         {
           error: "Failed to parse AI response.",
-          raw: responseText,
           details: err instanceof Error ? err.message : "Unknown parsing error.",
         },
         { status: 500 },

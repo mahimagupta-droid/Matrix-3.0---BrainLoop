@@ -3,8 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
-import TopicSelector from "@/lib/components/TopicSelector";
-import Link from "next/link";
+
 interface Question {
   id: number;
   question: string;
@@ -124,12 +123,7 @@ export default function QuizPageWithTracking() {
     sessionStorage.removeItem('quizQuestions');
     sessionStorage.removeItem('quizTopic');
     sessionStorage.removeItem('quizMetadata');
-    setQuestions([]);
-    setSelectedOptions({});
-    setIsSubmitted(false);
-    setScore(0);
-    setTopic('');
-    setMetadata(null);
+    router.push('/');
   };
 
   const handleViewWeakAreas = () => {
@@ -149,15 +143,19 @@ export default function QuizPageWithTracking() {
 
   if (!loading && questions.length === 0) {
     return (
-      <div className="min-h-screen px-6 py-16 bg-(--muted)">
-        <TopicSelector
-          onGenerated={(qs, generatedTopic, generatedMetadata) => {
-            setQuestions(qs);
-            setTopic(generatedTopic);
-            setMetadata(generatedMetadata);
-            setStartTime(Date.now());
-          }}
-        />
+      <div className="min-h-screen flex items-center justify-center bg-(--muted)">
+        <div className="bg-(--card) border border-(--border) rounded-3xl p-10 max-w-xl text-center">
+          <h1 className="text-3xl font-bold text-(--primary) mb-4">Weak areas unavailable</h1>
+          <p className="text-(--card-textColor) mb-6">
+            You need to complete a quiz first before weak areas can be generated.
+          </p>
+          <button
+            onClick={() => router.push('/')}
+            className="bg-(--primary) text-white px-6 py-3 rounded-lg hover:opacity-90 transition"
+          >
+            Return to Home
+          </button>
+        </div>
       </div>
     );
   }
@@ -269,7 +267,7 @@ export default function QuizPageWithTracking() {
         )}
 
         {/* Questions */}
-        <div className="flex flex-col gap-6 mb-4">
+        <div className="flex flex-col gap-6 mb-8">
           {questions.map((question, index) => {
             const isCorrect = selectedOptions[question.id] === question.correctAnswer;
             const isWrong = isSubmitted && selectedOptions[question.id] && !isCorrect;
@@ -355,7 +353,7 @@ export default function QuizPageWithTracking() {
         </div>
 
         {!isSubmitted && (
-          <div className="sticky bottom-0 pb-6 pt-4 bg-(--muted)">
+          <div className="sticky bottom-6">
             <button
               onClick={handleSubmit}
               disabled={answeredCount !== questions.length}
@@ -368,11 +366,6 @@ export default function QuizPageWithTracking() {
             </button>
           </div>
         )}
-        <Link href="/weak-areas">
-            <button className="bg-white text-purple-600 px-8 py-4 rounded-lg font-bold text-lg hover:shadow-xl transition">
-              View My Weak Areas 
-            </button>
-          </Link>
       </div>
     </div>
   );
