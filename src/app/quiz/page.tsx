@@ -34,7 +34,6 @@ export default function QuizPage() {
 
   useEffect(() => {
     if (!isLoaded) return;
-
     const baseKey = userId ? `_${userId}` : "";
     const storedQuestions = localStorage.getItem(`brainloop_questions${baseKey}`);
     const storedMetadata = localStorage.getItem(`brainloop_meta${baseKey}`);
@@ -43,7 +42,6 @@ export default function QuizPage() {
       try {
         const parsedQuestions = JSON.parse(storedQuestions);
         setQuestions(parsedQuestions);
-
         if (storedMetadata) {
           const parsedMeta = JSON.parse(storedMetadata);
           setMetadata(parsedMeta);
@@ -51,7 +49,6 @@ export default function QuizPage() {
         } else {
           setTopic('Practice');
         }
-
         setLoading(false);
       } catch (error) {
         console.error('Error loading quiz:', error);

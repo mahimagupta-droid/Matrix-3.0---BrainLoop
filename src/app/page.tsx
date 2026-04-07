@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { MagnifyingGlassIcon, ChatBubbleLeftRightIcon, ArrowPathIcon } from '@heroicons/react/24/outline';
-import TopicSelector from "@/lib/components/TopicSelector";
+// import TopicSelector from "@/lib/components/TopicSelector";
 
 export default function HomePage() {
   return (
