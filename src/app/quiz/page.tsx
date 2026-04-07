@@ -238,15 +238,15 @@ export default function QuizPageWithTracking() {
 
             {/* Weak Areas CTA - Only show if score < 80% */}
             {scorePercentage < 80 && user && (
-              <div className="bg-linear-to-r from-orange-500 to-red-600 rounded-xl p-6 text-white">
+              <div className="bg-[#FA989A] rounded-xl p-6 text-white">
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
-                    <h3 className="text-xl font-bold mb-2">🎯 Want to Improve?</h3>
+                    <h3 className="text-xl font-bold mb-2">Want to Improve?</h3>
                     <p className="opacity-90 mb-4">
                       Get a personalized quiz targeting your weak areas based on the questions you got wrong!
                     </p>
                   </div>
-                  <span className="text-4xl">📈</span>
+                  {/* <span className="text-4xl">📈</span> */}
                 </div>
                 <button
                   onClick={handleViewWeakAreas}
@@ -257,10 +257,9 @@ export default function QuizPageWithTracking() {
               </div>
             )}
 
-            {/* Perfect Score Celebration */}
             {scorePercentage === 100 && (
               <div className="bg-linear-to-r from-green-500 to-emerald-600 rounded-xl p-6 text-white text-center">
-                <span className="text-6xl mb-4 block">🎉</span>
+                {/* <span className="text-6xl mb-4 block">🎉</span> */}
                 <h3 className="text-2xl font-bold mb-2">Perfect Score!</h3>
                 <p className="opacity-90">You&apos;ve mastered this topic. Keep up the great work!</p>
               </div>
@@ -268,7 +267,6 @@ export default function QuizPageWithTracking() {
           </div>
         )}
 
-        {/* Questions */}
         <div className="flex flex-col gap-6 mb-4">
           {questions.map((question, index) => {
             const isCorrect = selectedOptions[question.id] === question.correctAnswer;
@@ -345,7 +343,7 @@ export default function QuizPageWithTracking() {
 
                 {isSubmitted && (
                   <div className="mt-5 p-5 bg-(--muted) rounded-lg border border-(--border)">
-                    <p className="text-sm font-medium text-(--primary) mb-2">📚 Learning Insight:</p>
+                    <p className="text-sm font-medium text-(--primary) mb-2">Learning Insight:</p>
                     <p className="text-sm text-(--card-textColor)">{question.diagnosticValue}</p>
                   </div>
                 )}
@@ -368,11 +366,6 @@ export default function QuizPageWithTracking() {
             </button>
           </div>
         )}
-        <Link href="/weak-areas">
-            <button className="bg-white text-purple-600 px-8 py-4 rounded-lg font-bold text-lg hover:shadow-xl transition">
-              View My Weak Areas 
-            </button>
-          </Link>
       </div>
     </div>
   );

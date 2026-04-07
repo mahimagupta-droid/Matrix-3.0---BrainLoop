@@ -8,7 +8,10 @@ const isPublicRoute = createRouteMatcher([
   "/weak-areas(.*)",
   "/sign-in(.*)",
   "/sign-up(.*)",
-  "/api/generate-questions(.*)"
+  "/api/generate-questions(.*)",
+  "/api/weak-areas(.*)",
+  "/api/quiz/submit(.*)",
+  "/api/test(.*)"
 ]);
 
 export default clerkMiddleware(async (auth, request) => {

@@ -37,26 +37,18 @@ export default function QuickStats() {
       <StatCard 
         title="Total Quizzes"
         value={stats.totalQuizzes}
-        icon="📝"
-        color="blue"
       />
       <StatCard 
         title="Average Score"
         value={`${stats.averageScore}%`}
-        icon="🎯"
-        color="green"
       />
       <StatCard 
         title="Current Streak"
         value={`${stats.currentStreak} days`}
-        icon="🔥"
-        color="orange"
       />
       <StatCard 
         title="Improvement"
         value={`+${stats.improvement}%`}
-        icon="📈"
-        color="purple"
       />
     </div>
   );
@@ -72,9 +64,9 @@ function StatCard({ title, value, icon, color }: any) {
 
   return (
     <div className="bg-(--card) rounded-xl border border-(--border) p-6">
-      <div className={`w-12 h-12 rounded-lg ${colors[color]} flex items-center justify-center text-2xl mb-3`}>
+      {/* <div className={`w-12 h-12 rounded-lg ${colors[color]} flex items-center justify-center text-2xl mb-3`}>
         {icon}
-      </div>
+      </div> */}
       <p className="text-sm text-(--card-textColor) mb-1">{title}</p>
       <p className="text-2xl font-bold text-(--primary)">{value}</p>
     </div>

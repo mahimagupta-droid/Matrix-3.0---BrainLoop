@@ -1,34 +1,44 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextRequest, NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { auth } from "@clerk/nextjs/server";
+// import { auth } from "@clerk/nextjs/server";
 
-const MODEL_ID = "gemini-2.5-flash";
+export const runtime = "nodejs";
+
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+const MODEL_ID = "gemini-3-flash-preview";
 
 export async function POST(request: NextRequest) {
+  console.log("API called: /api/generate-questions");
+
+  if (!GEMINI_API_KEY) {
+    console.error("Missing GEMINI_API_KEY");
+    return NextResponse.json(
+      { error: "Server configuration error: GEMINI_API_KEY is not set." },
+      { status: 500 },
+    );
+  }
+
+  console.log("Creating GoogleGenerativeAI client");
+  const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
+
   try {
-    const { userId } = await auth();
-
-    if (!userId) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-
-    if (!process.env.GEMINI_API_KEY) {
+    console.log("Parsing request body");
+    let body;
+    try {
+      body = await request.json();
+    } catch (parseError) {
+      console.error("Failed to parse request body:", parseError);
       return NextResponse.json(
-        { error: "Server configuration error: GEMINI_API_KEY is not set." },
-        { status: 500 },
+        { error: "Invalid JSON in request body" },
+        { status: 400 }
       );
     }
-
-    const body = await request.json();
     const { topic, difficulty, numberOfQuestions } = body;
+    console.log("Request body parsed:", { topic, difficulty, numberOfQuestions });
 
     if (!topic || topic.trim().length === 0) {
       return NextResponse.json({ error: "Topic is required" }, { status: 400 });
     }
-
-    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-    const model = genAI.getGenerativeModel({ model: MODEL_ID });
 
     const questionCount = Math.min(Math.max(numberOfQuestions || 10, 5), 20);
     const prompt = `Generate exactly ${questionCount} multiple-choice questions about "${topic}" for an adaptive learning platform.
@@ -55,16 +65,31 @@ Format:
   }
 ]`;
 
-    const result = await model.generateContent({
-      contents: [{ role: "user", parts: [{ text: prompt }] }],
-      generationConfig: { temperature: 0.7, maxOutputTokens: 4096 },
-    });
+    const model = genAI.getGenerativeModel({ model: MODEL_ID });
 
-    const responseText = result.response.text().trim();
+    let result;
+    try {
+      result = await model.generateContent(prompt);
+    } catch (apiError) {
+      console.error("Gemini API error:", apiError);
+      return NextResponse.json(
+        {
+          error: "AI service error. Please check your API key.",
+          details: apiError instanceof Error ? apiError.message : "Unknown API error.",
+        },
+        { status: 500 },
+      );
+    }
+
+    const responseText = result.response.text();
 
     if (!responseText) {
+      console.error("Gemini returned an empty response");
       return NextResponse.json(
-        { error: "Empty response from Gemini API." },
+        {
+          error: "Empty response from AI service.",
+          details: "The AI service did not return any content.",
+        },
         { status: 500 },
       );
     }
@@ -87,7 +112,7 @@ Format:
         throw new Error("Parsed response is not an array.");
       }
 
-      questions = questions.map((q: any, index: number) => ({
+      questions = questions.map((q, index) => ({
         id: q.id || index + 1,
         question: q.question || "",
         options: Array.isArray(q.options) ? q.options : [],
@@ -97,10 +122,11 @@ Format:
         diagnosticValue: q.diagnosticValue || "No diagnostic info available",
       }));
     } catch (err) {
-      console.error("Parsing error:", err, "raw response:", responseText);
+      console.error("Parsing error:", err, "raw response:", responseText.substring(0, 500));
       return NextResponse.json(
         {
           error: "Failed to parse AI response.",
+          raw: responseText.substring(0, 500),
           details: err instanceof Error ? err.message : "Unknown parsing error.",
         },
         { status: 500 },

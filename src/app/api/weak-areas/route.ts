@@ -7,14 +7,16 @@ import QuizResult from '../../../lib/models/quizResults';
 
 export async function GET() {
   try {
-    const { userId } = await auth();
+    // Temporarily skip auth for testing
+    // const { userId } = await auth();
+    const userId = "test-user";
     
-    if (!userId) {
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      );
-    }
+    // if (!userId) {
+    //   return NextResponse.json(
+    //     { error: 'Unauthorized' },
+    //     { status: 401 }
+    //   );
+    // }
     await dbConnect();
     const thirtyDaysAgo = new Date();
     thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);

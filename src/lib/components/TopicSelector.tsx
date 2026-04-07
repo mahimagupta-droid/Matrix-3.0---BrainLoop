@@ -82,7 +82,13 @@ export default function TopicSelector({ onGenerated }: TopicSelectorProps = {}) 
         body: JSON.stringify(payload),
       });
 
-      const data = await response.json();
+      const bodyText = await response.text();
+      let data;
+      try {
+        data = JSON.parse(bodyText);
+      } catch {
+        throw new Error(`Invalid JSON response from /api/generate-questions: ${bodyText.slice(0, 300)}`);
+      }
 
       if (!response.ok || !data.success) {
         throw new Error(data.error || "Failed to generate questions.");
