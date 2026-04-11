@@ -4,6 +4,7 @@ import Link from "next/link";
 import Logo from "../../../public/project-logo.png";
 import Image from "next/image";
 import { useState } from "react";
+import { ThemeToggle } from "./ThemeToggle";
 
 export default function Navbar() {
   const { isSignedIn } = useUser();
@@ -17,7 +18,7 @@ export default function Navbar() {
             <Image
               src={Logo}
               alt="projectLogo"
-              className="w-20 md:w-36 h-auto object-contain gap-x-0"
+              className="w-20 md:w-36 h-auto object-contain gap-x-0 dark:invert"
               priority
             />
           </Link>
@@ -39,6 +40,7 @@ export default function Navbar() {
         </div>
 
         <div className="hidden md:flex items-center gap-8">
+          <ThemeToggle />
           {isSignedIn ? (
             <>
               <SignOutButton>
@@ -86,7 +88,8 @@ export default function Navbar() {
 
           <div className="w-full h-px bg-(--border) my-2"></div>
 
-          <div className="flex w-full justify-center">
+          <div className="flex w-full justify-center gap-4 items-center flex-col">
+            <ThemeToggle />
             {isSignedIn ? (
               <div className="flex flex-col items-center gap-4">
                 <UserButton />

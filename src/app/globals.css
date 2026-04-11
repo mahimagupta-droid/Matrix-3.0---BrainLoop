@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:is(.dark *));
+
 :root {
     /* Background Hierarchy */
     --background: #e1e9f2;                      /* White - main background */
@@ -59,12 +61,39 @@
   --font-mono: var(--font-geist-mono);
 }
 
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --textColor: #ededed;
-  } */
-/* } */
+.dark {
+    --background: #0f172a;           /* Dark slate background */
+    --textColor: #f8fafc;            /* Light gray text */
+    --card: #1e293b;                 /* Darker slate for cards */
+    --card-textColor: #94a3b8;       /* Medium slate text on cards */
+    --primary: #3b82f6;              /* Lighter blue for primary on dark */
+    --primary-textColor: #ffffff;
+    --secondary: #334155;
+    --secondary-textColor: #f1f5f9;
+    --muted: #1e293b;
+    --muted-textColor: #64748b;
+    --accent: #3b82f6;
+    --accent-textColor: #ffffff;
+    --border: #334155;
+    --input: #1e293b;
+    --ring: #3b82f6;
+    
+    /* Success / Correct Answers */
+    --success: #10b981;              
+    --success-textColor: #ffffff;
+
+    /* Danger / Errors */
+    --danger: #ef4444;               
+    --danger-textColor: #ffffff;
+
+    /* Warning / Incorrect Answers */
+    --warning: #f59e0b;              
+    --warning-textColor: #ffffff;
+
+    /* Info / Neutral */
+    --info: #3b82f6;                 
+    --info-textColor: #ffffff;
+}
 
 body {
   background: var(--background);

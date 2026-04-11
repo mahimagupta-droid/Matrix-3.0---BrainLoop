@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
+import { ThemeProvider } from "@/lib/components/theme-provider";
 import Navbar from "@/lib/components/navbar";
 import Footer from "@/lib/components/footer";
 
@@ -31,19 +32,22 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
     // className="bg-black text-gray-100"
     >
       <ClerkProvider>
         <body
-          className={`${geistSans.variable} ${geistMono.variable} bg-background text-foreground`}
+          className={`${geistSans.variable} ${geistMono.variable} bg-background text-foreground transition-colors duration-300`}
         >
-          <div className="sticky top-0 z-50 border-(--border)">
-            <Navbar />
-          </div>
-          {children}
-          <div className="border">
-            <Footer />
-          </div>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+            <div className="sticky top-0 z-50 border-b border-(--border)">
+              <Navbar />
+            </div>
+            {children}
+            <div className="border-t border-(--border)">
+              <Footer />
+            </div>
+          </ThemeProvider>
         </body>
       </ClerkProvider>
     </html>
